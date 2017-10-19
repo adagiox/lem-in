@@ -9,6 +9,17 @@ void print_ants(t_ant *ant)
 	}
 }
 
+void print_room_list(t_room_list *room_list)
+{
+	while (room_list != NULL)
+	{
+		ft_printf("\nRoom: %s\n------------------\nx:\t\t%i\ny:\t\t%i\nis_start:\t%u\nis_end:\t\t%u\n", 
+			room_list->room->name, room_list->room->x, room_list->room->y, 
+			room_list->room->is_start, room_list->room->is_end);
+		room_list = room_list->next_room_list;
+	}
+}
+
 t_ant *new_ants(int size)
 {
 	t_ant *ant;
@@ -64,17 +75,35 @@ t_ant *read_ants()
 	return (ant);
 }
 
-int add_room(t_room_list *room_list, unsigned int start, unsigned int end)
+t_room_list *new_room_list(t_room *room)
 {
+	t_room_list *new;
 
-	return (1);
+	new = (t_room_list *)malloc(sizeof(t_room_list));
+	new->room = room;
+	new->next_room_list = NULL;
+	return (new);
 }
 
-int command(char *line, t_room_list *room_list)
+t_room_list *add_room_list(t_room *room, t_room_list *room_list)
+{
+	t_room_list *head;
+
+	head = room_list;
+	if (room_list == NULL)
+		return (new_room_list(room));
+	while (room_list->next_room_list != NULL)
+		room_list = room_list->next_room_list;
+	room_list->next_room_list = new_room_list(room);
+	return (head);
+}
+
+t_room_list *command(char *line, t_room_list *room_list)
 {
 	char *new_line;
 	unsigned int start;
 	unsigned int end;
+	t_room *room;
 
 	start = 0;
 	end = 0;
@@ -82,13 +111,46 @@ int command(char *line, t_room_list *room_list)
 		start = 1;
 	else if (ft_strstr(line, "##end"))
 		end = 1;
-	add_room(room_list, start, end);
-	return (1);
+	room = next_room(start, end);
+	room_list = add_room_list(room, room_list);
+	return (room_list);
 }
 
-int next_room(t_room_list *room_list)
+t_room *new_room(unsigned int start, unsigned int end, char **room)
 {
+	t_room *new;
 
+	new = (t_room *)malloc(sizeof(t_room));
+	new->name = room[0];
+	new->dist = -1;
+	new->x = ft_atoi(room[1]);
+	new->y = ft_atoi(room[2]);
+	new->ant = NULL;
+	new->is_occupied = 0;
+	new->is_start = start;
+	new->is_end = end;
+	new->next_room = NULL;
+	return (new);
+}
+
+t_room *next_room(unsigned int start, unsigned int end)
+{
+	char *line;
+	t_room *room;
+	int ret;
+
+	if((ret = get_next_line(0, &line)) <= 0)
+		return (NULL);
+	room = new_room(start, end, ft_strsplit(line, ' '));
+	return (room);
+}
+
+t_room *next_line_room(char *line)
+{
+	t_room *room;
+
+	room = new_room(0, 0, ft_strsplit(line, ' '));
+	return (room);
 }
 
 t_room_list *read_rooms()
@@ -97,16 +159,21 @@ t_room_list *read_rooms()
 	int ret;
 	t_room_list *room_list;
 
+	room_list = NULL;
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
 		if (ft_strstr(line, "##start") || ft_strstr(line, "##end"))
-			command(line, room_list);
+			room_list = command(line, room_list);
 		else if (line[0] == '#')
 			continue ;
+		else if (ft_strstr(line, "-"))
+		{
+			//read_links(room_list);
+			return (room_list);
+		}
+		else
+			room_list = add_room_list(next_line_room(line), room_list);
 	}
-	if (ret <= 0)
-		return (NULL);
-	// read_links(room_list);
 	return (room_list);
 }
 
@@ -125,10 +192,10 @@ int	lemin()
 
 	if ((ants = read_ants()) == NULL)
 		 return (-1);
+	print_ants(ants);
 	if ((room_list = read_rooms()) == NULL)
 		return (-1);
-	
-	print_ants(ants);
+	print_room_list(room_list);
 	return (1);
 }
 
