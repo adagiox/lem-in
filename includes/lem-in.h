@@ -19,17 +19,18 @@ typedef struct	s_room
 	unsigned int	is_occupied:1;
 	unsigned int	is_start:1;
 	unsigned int	is_end:1;
-	struct s_room	*next_room;
 }				t_room;
 
 typedef struct	s_room_list
 {
 	t_room				*room;
+	struct s_room_list	*next_room;
 	struct s_room_list	*next_room_list;
 }				t_room_list;
 
 void print_ants(t_ant *ant);
 void print_room_list(t_room_list *room_list);
+void print_links(t_room_list *room_list);
 t_ant *new_ants(int size);
 t_ant *read_ants();
 t_room_list *new_room_list(t_room *room);
