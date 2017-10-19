@@ -16,6 +16,7 @@ void print_room_list(t_room_list *room_list)
 		ft_printf("\nRoom: %s\n------------------\nx:\t\t%i\ny:\t\t%i\nis_start:\t%u\nis_end:\t\t%u\n", 
 			room_list->room->name, room_list->room->x, room_list->room->y, 
 			room_list->room->is_start, room_list->room->is_end);
+		ft_printf("Distance:\t%i\n", room_list->room->dist);
 		ft_printf("Links:\t\t");
 		print_links(room_list);
 		room_list = room_list->next_room_list;
@@ -88,7 +89,6 @@ t_ant *read_ants()
 	size = ft_atoi(line);
 	if (size <= 0)
 		return (NULL);
-	ft_printf("size: %i\n", size);
 	ant = new_ants(size);
 	return (ant);
 }
@@ -100,6 +100,7 @@ t_room_list *new_room_list(t_room *room)
 	new = (t_room_list *)malloc(sizeof(t_room_list));
 	new->room = room;
 	new->next_room_list = NULL;
+	new->next_room = NULL;
 	return (new);
 }
 
@@ -142,6 +143,7 @@ t_room *new_room(unsigned int start, unsigned int end, char **room)
 	new = (t_room *)malloc(sizeof(t_room));
 	new->name = room[0];
 	new->dist = -1;
+	new->is_set = 0;
 	new->x = ft_atoi(room[1]);
 	new->y = ft_atoi(room[2]);
 	new->ant = NULL;
@@ -213,7 +215,9 @@ t_room *get_link_room(t_room_list *room_list, char *name)
 t_room_list *get_room_list_head(t_room_list *room_list, char *name)
 {
 	while ((ft_strcmp(room_list->room->name, name)) != 0 && room_list != NULL)
+	{
 		room_list = room_list->next_room_list;
+	}
 	if (room_list == NULL)
 		return (NULL);
 	return (room_list);
@@ -244,6 +248,7 @@ int add_link_line(t_room_list *room_list, char *line)
 	t_room_list *head;
 	t_room *room_add;
 
+	print_room_list(room_list);
 	split = ft_strsplit(line, '-');
 	head = get_room_list_head(room_list, split[0]);
 	room_add = get_link_room(room_list, split[1]);
@@ -272,6 +277,29 @@ int read_links(char *line, t_room_list *room_list)
 	return (1);
 }
 
+t_room_list *get_end(t_room_list *room_list)
+{
+	while (room_list->room->is_end != 1 && room_list != NULL)
+		room_list = room_list->next_room_list;
+	return (room_list);
+}
+
+int set_distance(t_room_list *room_list, int dist)
+{
+	while (room_list != NULL)
+	{
+		if (room_list->room->is_set == 1)
+		{
+			room_list = room_list->next_room;
+			continue ;
+		}
+		room_list->room->dist = dist;
+		room_list->room->is_set = 1;
+		set_distance(room_list->next_room, dist + 1);
+	}
+	return (1);
+}
+
 int	lemin()
 {
 	char *line;
@@ -280,10 +308,10 @@ int	lemin()
 	t_room_list *room_list;
 
 	if ((ants = read_ants()) == NULL)
-		 return (-1);
-	//print_ants(ants);
+		return (-1);
 	if ((room_list = read_rooms()) == NULL)
 		return (-1);
+	set_distance(get_end(room_list), 0);
 	print_room_list(room_list);
 	return (1);
 }

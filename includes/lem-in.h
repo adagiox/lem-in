@@ -13,6 +13,7 @@ typedef struct	s_room
 {
 	char			*name;
 	int				dist;
+	unsigned int	is_set:1;
 	int				x;
 	int				y;
 	t_ant			*ant;
@@ -39,6 +40,7 @@ t_room_list *command(char *line, t_room_list *room_list);
 t_room *new_room(unsigned int start, unsigned int end, char **room);
 t_room *next_room(unsigned int start, unsigned int end);
 t_room_list *read_rooms();
+int set_distance(t_room_list *room_list, int dist);
 int read_links(char *line, t_room_list *room_list);
 int	lemin();
 
