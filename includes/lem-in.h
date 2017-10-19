@@ -12,6 +12,7 @@ typedef struct	s_ant
 typedef struct	s_room
 {
 	char			*name;
+	int				dist;
 	t_ant			*ant;
 	unsigned int	is_occupied:1;
 	unsigned int	is_start:1;
@@ -20,8 +21,8 @@ typedef struct	s_room
 
 typedef struct	s_room_list
 {
-	t_room	*head;
-	t_room	*next_room;
+	t_room				*head;
+	struct s_room_list	*next_room;
 }				t_room_list;
 
 #endif

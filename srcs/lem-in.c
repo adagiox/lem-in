@@ -37,32 +37,109 @@ t_ant *new_ants(int size)
 	return (head);
 }
 
-t_ant *init_ants(char *line)
+t_ant *read_ants()
 {
+	char *line;
 	t_ant *ant;
 	int size;
+	int ret;
 
+	while ((ret = get_next_line(0, &line)))
+	{
+		if (ret > 0)
+		{
+			if (line[0] == '#' && line[1] != '#')
+				continue ;
+			else
+				break ;
+		}
+		else
+			return (NULL);
+	}
 	size = ft_atoi(line);
+	if (size <= 0)
+		return (NULL);
 	ft_printf("size: %i\n", size);
 	ant = new_ants(size);
 	return (ant);
 }
 
+int add_room(t_room_list *room_list, unsigned int start, unsigned int end)
+{
+
+	return (1);
+}
+
+int command(char *line, t_room_list *room_list)
+{
+	char *new_line;
+	unsigned int start;
+	unsigned int end;
+
+	start = 0;
+	end = 0;
+	if (ft_strstr(line, "##start"))
+		start = 1;
+	else if (ft_strstr(line, "##end"))
+		end = 1;
+	add_room(room_list, start, end);
+	return (1);
+}
+
+int next_room(t_room_list *room_list)
+{
+
+}
+
+t_room_list *read_rooms()
+{
+	char *line;
+	int ret;
+	t_room_list *room_list;
+
+	while ((ret = get_next_line(0, &line)) > 0)
+	{
+		if (ft_strstr(line, "##start") || ft_strstr(line, "##end"))
+			command(line, room_list);
+		else if (line[0] == '#')
+			continue ;
+	}
+	if (ret <= 0)
+		return (NULL);
+	// read_links(room_list);
+	return (room_list);
+}
+
+// int read_links(t_room_list *room_list)
+// {
+
+// 	return (1);
+// }
+
 int	lemin()
 {
 	char *line;
 	int ret;
-	t_ant *ant;
+	t_ant *ants;
+	t_room_list *room_list;
 
-	ret = 1;
-	ret = get_next_line(0, &line);
-	ant = init_ants(line);
-	print_ants(ant);
+	if ((ants = read_ants()) == NULL)
+		 return (-1);
+	if ((room_list = read_rooms()) == NULL)
+		return (-1);
+	
+	print_ants(ants);
 	return (1);
 }
 
 int main(void)
 {
-	lemin();
+	int ret;
+
+	if ((ret = lemin()) == -1)
+	{
+		ft_printf("ERROR\n");
+		return (-1);
+	}
 	return (0);
 }
