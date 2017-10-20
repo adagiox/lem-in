@@ -6,6 +6,8 @@ typedef struct	s_ant
 {
 	int				number;
 	unsigned int	has_moved:1;
+	unsigned int 	at_end:1;
+	t_room			*current_room;
 	struct s_ant	*next_ant;
 }				t_ant;
 

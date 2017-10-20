@@ -50,6 +50,8 @@ t_ant *new_ants(int size)
 	head = (t_ant *)malloc(sizeof(t_ant));
 	head->number = number;
 	head->has_moved = 0;
+	head->at_end = 0;
+	head->current_room = NULL;
 	head->next_ant = NULL;
 	number++;
 	ant = head;
@@ -60,6 +62,8 @@ t_ant *new_ants(int size)
 		new = (t_ant *)malloc(sizeof(t_ant));
 		new->number = number;
 		new->has_moved = 0;
+		new->at_end = 0;
+		new->current_room = NULL;
 		new->next_ant = NULL;
 		ant->next_ant = new;
 		number++;
@@ -277,7 +281,6 @@ int add_link_line(t_room_list *room_list, char *line)
 	t_room_list *head;
 	t_room *room_add;
 
-	//print_room_list(room_list);
 	split = ft_strsplit(line, '-');
 	head = get_room_list_head(room_list, split[0]);
 	room_add = get_link_room(room_list, split[1]);
@@ -396,9 +399,14 @@ t_room_list *get_start(t_room_list *room_list)
 	return (room_list);
 }
 
-int next_move(t_ant *ant, t_room_list *room_list)
+int set_ants(t_ant *ant, t_room_list *room_list)
 {
-
+	room_list = get_start(room_list);
+	while (ant)
+	{
+		ant->current_room = room_list->room;
+		ant = ant->next_ant;
+	}
 	return (1);
 }
 
@@ -409,29 +417,86 @@ int get_size_ants(t_ant *ant)
 	size = 0;
 	while (ant)
 	{
+		if (ant->at_end != 1)
+			size++;
 		ant = ant->next_ant;
-		size++;
 	}
 	return (size);
 }
 
-int move_ants(t_ant *ant, t_room_list *room_list)
+t_room *get_min_dist(t_room_list *room_list)
+{
+	int min;
+	t_room *go;
+
+	min = room_list->room->dist;
+	while (room_list)
+	{
+
+	}
+	return (go);
+}
+
+t_room *check_move(t_ant *ant, t_room_list *room_list)
+{
+	t_room_list *check_links;
+	t_room *go;
+
+	check_links = get_room_list_head(room_list, ant->current_room->name);
+	if ((go = get_min_dist(check_links)) == NULL)
+		return (-1);
+	return (go);
+}
+
+int next_move(t_room_list *room_list)
 {
 	t_room_list *head;
-	int turns;
 
-	turns = get_size_ants();
 	head = room_list;
-	room_list = get_start(head);
-	while (next_move(ant, room_list) == 1)
-	{}
+	while (room_list != NULL)
+	{
+		current = room_list;
+		while (current != NULL)
+		{
+
+		}
+		room_list = room_list->next_room_list;
+	}
 	return (1);
 }
 
-int set_ants(t_ant *ant, t_room_list *room_list)
+int reset_ants(t_ant *ant)
 {
-	room_list = get_start(room_list);
-	room_list->room->ant = ant;
+	while (ant)
+	{
+		if (ant->at_end != 1)
+			ant->has_moved = 0;
+		ant = next_ant;
+	}
+	return (1);
+}
+
+int move_ant_room(t_ant *ant, t_room *dest)
+{
+	if (dest->is_end == 1)
+	{
+		dest->
+	}
+	return (1);
+}
+
+int move_ants(t_ant *ant, t_room_list *room_list)
+{
+	int turns;
+
+	turns = get_size_ants(ant);
+	while (turns > 0)
+	{
+		reset_ants(ant);
+		while (turns)
+			turns += next_move(room_list);
+		turns = get_size_ants(ant);
+	}
 	return (1);
 }
 
