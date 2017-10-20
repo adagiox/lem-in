@@ -117,6 +117,8 @@ t_room_list *add_room_list(t_room *room, t_room_list *room_list)
 {
 	t_room_list *head;
 
+	if (room == NULL)
+		return (NULL);
 	if (room_list == NULL)
 		return (new_room_list(room));
 	head = room_list;
@@ -173,6 +175,50 @@ t_room *new_room(unsigned int start, unsigned int end, char **room)
 	return (new);
 }
 
+int	check_line_split(char **split)
+{
+	int size;
+
+	size = 0;
+	while (split)
+	{
+		size++;
+		split++;
+	}
+	if (size != 2)
+		return (-1);
+	return (1);
+}
+
+int count_split(char **split)
+{
+	int i;
+	int size;
+
+	size = 0;
+	i = 0;
+	while (split[i])
+	{
+		ft_printf("count split: %s\n", split[i]);
+		i++;
+		size++;
+	}
+	return (size);
+}
+
+int	check_room_split(char **split)
+{
+	int size;
+
+	size = count_split(split);
+	if (size != 3)
+	{
+		//ft_printf("split not 3\n");
+		return (-1);
+	}
+	return (1);
+}
+
 t_room *next_room(unsigned int start, unsigned int end)
 {
 	char *line;
@@ -186,6 +232,8 @@ t_room *next_room(unsigned int start, unsigned int end)
 	if (line[0] == '#' || ft_strstr(line, "-") || line[1] == '#' || line[0] == 'L')
 		return (NULL);
 	split = ft_strsplit(line, ' ');
+	if (check_room_split(split) == -1)
+		return (NULL);
 	room = new_room(start, end, split);
 	free(line);
 	free(split[0]);
@@ -201,6 +249,8 @@ t_room *next_line_room(char *line)
 	char **split;
 
 	split = ft_strsplit(line, ' ');
+	if (check_room_split(split) == -1)
+		return (NULL);
 	room = new_room(0, 0, split);
 	free(split[0]);
 	free(split[1]);
@@ -234,7 +284,8 @@ t_room_list *read_rooms()
 		{
 			if (line[0] == 'L')
 				return (NULL);
-			room_list = add_room_list(next_line_room(line), room_list);
+			if ((room_list = add_room_list(next_line_room(line), room_list)) == NULL)
+				return (NULL);
 		}
 		else
 		{	
