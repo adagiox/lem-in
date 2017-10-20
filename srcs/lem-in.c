@@ -183,7 +183,7 @@ t_room *next_room(unsigned int start, unsigned int end)
 	if ((ret = get_next_line(0, &line)) <= 0)
 		return (NULL);
 	ft_printf("%s\n", line);
-	if (line[0] == '#' || ft_strstr(line, "-") || line[1] == '#')
+	if (line[0] == '#' || ft_strstr(line, "-") || line[1] == '#' || line[0] == 'L')
 		return (NULL);
 	split = ft_strsplit(line, ' ');
 	room = new_room(start, end, split);
@@ -232,6 +232,8 @@ t_room_list *read_rooms()
 			continue ;
 		else if (!ft_strstr(line, "-"))
 		{
+			if (line[0] == 'L')
+				return (NULL);
 			room_list = add_room_list(next_line_room(line), room_list);
 		}
 		else
