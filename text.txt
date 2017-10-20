@@ -1,0 +1,29 @@
+L1-4 No ants can move
+No ants can move
+No ants can move
+No ants can move
+No ants can move
+No ants can move
+No ants can move
+
+L1-7 L2-4 No ants can move
+No ants can move
+No ants can move
+No ants can move
+No ants can move
+No ants can move
+No ants can move
+No ants can move
+
+L1-9 L2-7 L3-4 No ants can move
+No ants can move
+No ants can move
+No ants can move
+No ants can move
+No ants can move
+
+L2-9 L3-7 No ants can move
+No ants can move
+No ants can move
+
+L3-9 
