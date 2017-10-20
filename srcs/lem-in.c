@@ -417,7 +417,7 @@ int get_size_ants(t_ant *ant)
 	size = 0;
 	while (ant)
 	{
-		if (ant->at_end != 1)
+		if (ant->at_end == 0)
 			size++;
 		ant = ant->next_ant;
 	}
@@ -428,29 +428,24 @@ t_room *get_min_dist(t_room_list *room_list)
 {
 	int min;
 	t_room *go;
-	int set;
 
-	set = 0;
+	min = room_list->room->dist;
+	room_list = room_list->next_room;
 	if (room_list == NULL)
 		return (NULL);
-	min = room_list->room->dist;
 	go = room_list->room;
 	while (room_list)
 	{
 		//ft_printf("Room min: %s\n", room_list->room->name);
-		if (room_list->room->dist <= min && room_list->room->is_occupied == 0)
+		if (room_list->room->dist < min && room_list->room->is_occupied == 0)
 		{
 			min = room_list->room->dist;
 			go = room_list->room;
-			set = 1;
 		}
 		room_list = room_list->next_room;
 	}
-	if (set == 0)
-	{
-		//ft_printf("Return -1\n");
+	if (go->is_occupied == 1)
 		return (NULL);
-	}
 	return (go);
 }
 
@@ -460,7 +455,7 @@ t_room *check_move(t_ant *ant, t_room_list *room_list)
 	t_room *go;
 
 	check_links = get_room_list_head(room_list, ant->current_room->name);
-	go = get_min_dist(check_links->next_room);
+	go = get_min_dist(check_links);
 	return (go);
 }
 
@@ -498,11 +493,28 @@ int reset_ants(t_ant *ant)
 
 int move_ant_room(t_ant *ant, t_room *dest)
 {
+	t_ant *p;
+	t_room *src;
+
+	src = ant->current_room;
+	if (ant->current_room->is_start == 0)
+		ant->current_room->is_occupied = 0;
 	if (dest->is_end == 1)
+	{
 		ant->at_end = 1;
-	dest->is_occupied = 1;
-	ant->current_room = dest;
-	ant->has_moved = 1;
+		ant->has_moved = 1;
+		p = dest->ant;
+		while (p->next_ant != NULL)
+			p = p->next_ant;
+		p->next_ant = ant;
+	}
+	else
+	{
+		dest->is_occupied = 1;
+		dest->ant = ant;
+		ant->current_room = dest;
+		ant->has_moved = 1;
+	}
 	ft_printf("L%i-%s ", ant->number, dest->name);
 	return (1);
 }
