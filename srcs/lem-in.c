@@ -81,6 +81,7 @@ t_ant *read_ants()
 
 	while ((ret = get_next_line(0, &line)))
 	{
+		ft_printf("%s\n", line);
 		if (ret > 0)
 		{
 			if (line[0] == '#' && line[1] != '#')
@@ -171,6 +172,7 @@ t_room *next_room(unsigned int start, unsigned int end)
 
 	if ((ret = get_next_line(0, &line)) <= 0)
 		return (NULL);
+	ft_printf("%s\n", line);
 	if (line[0] == '#') //|| (!ft_strstr(line, "-") && line[1] != '#')
 		return (NULL);
 	split = ft_strsplit(line, ' ');
@@ -201,16 +203,18 @@ t_room_list *read_rooms()
 {
 	char *line;
 	int ret;
+	int links;
 	t_room_list *room_list;
 
 	room_list = NULL;
+	links = 0;
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
+		ft_printf("%s\n", line);
 		if (ft_strstr(line, "##start") || ft_strstr(line, "##end"))
 		{
 			if ((room_list = command(line, room_list)) == NULL)
 			{
-				free(line);
 				return (NULL);
 			}
 		}
@@ -223,14 +227,18 @@ t_room_list *read_rooms()
 				free(line);
 				return (NULL);
 			}
+			links = 1;
 			free(line);
 			return (room_list);
 		}
 		else
 			room_list = add_room_list(next_line_room(line), room_list);
-		free(line);
+		// free(line);
 	}
-	free(line);
+	//ft_printf("Line: %s\n", line);
+	ft_strdel(&line);
+	if (links == 0)
+		return (NULL);
 	return (room_list);
 }
 
@@ -302,6 +310,7 @@ int read_links(char *line, t_room_list *room_list)
 	add_link_line(room_list, line);
 	while ((ret = get_next_line(0, &new_line)) > 0)
 	{
+		ft_printf("%s\n", new_line);
 		if (new_line[0] == '#' && ret > 0)
 		{
 			free(new_line);
@@ -571,6 +580,7 @@ int	lemin()
 		return (-1);
 	//print_room_list(room_list);
 	set_ants(ants, room_list);
+	ft_printf("\n");
 	move_ants(ants, room_list);
 	// NEED TO FREE ROOMS AND ROOM LIST BEFORE EXIT
 	return (1);
