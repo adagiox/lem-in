@@ -312,7 +312,6 @@ int read_links(char *line, t_room_list *room_list)
 		else
 			break ;
 	}
-	free(new_line);
 	return (1);
 }
 
@@ -545,7 +544,7 @@ int	lemin()
 	if ((room_list = read_rooms()) == NULL)
 		return (-1);
 	set_distance(room_list);
-	print_room_list(room_list);
+	//print_room_list(room_list);
 	set_ants(ants, room_list);
 	move_ants(ants, room_list);
 	// NEED TO FREE ROOMS AND ROOM LIST BEFORE EXIT
