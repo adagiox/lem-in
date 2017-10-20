@@ -429,6 +429,9 @@ t_room *get_min_dist(t_room_list *room_list)
 	int min;
 	t_room *go;
 
+	room_list = room_list->next_room;
+	if (room_list == NULL)
+		return (NULL);
 	min = room_list->room->dist;
 	go = NULL;
 	while (room_list)
@@ -462,12 +465,11 @@ int next_move(t_ant *ant, t_room_list *room_list)
 		if (ant->has_moved == 0)
 		{
 			if ((go = check_move(ant, room_list)) == NULL)
-			{
-				ant->has_moved = 1;
-				return (1);
-			}
-			// move ant
-			// return 1
+				return (0);	
+			move_ant_room(ant, go);
+			if (go->is_end)
+				return (-1);
+			return (0);
 		}
 		ant = ant->next_ant;
 	}
@@ -490,6 +492,7 @@ int move_ant_room(t_ant *ant, t_room *dest)
 	if (dest->is_end == 1)
 		ant->at_end = 1;
 	ant->current_room = dest;
+	ant->has_moved = 1;
 	ft_printf("L%i-%s", ant->number, dest->name);
 	return (1);
 }
