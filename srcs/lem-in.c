@@ -428,20 +428,28 @@ t_room *get_min_dist(t_room_list *room_list)
 {
 	int min;
 	t_room *go;
+	int set;
 
-	room_list = room_list->next_room;
+	set = 0;
 	if (room_list == NULL)
 		return (NULL);
 	min = room_list->room->dist;
-	go = NULL;
+	go = room_list->room;
 	while (room_list)
 	{
-		if (room_list->room->dist < min && room_list->room->is_occupied != 1)
+		//ft_printf("Room min: %s\n", room_list->room->name);
+		if (room_list->room->dist <= min && room_list->room->is_occupied == 0)
 		{
 			min = room_list->room->dist;
 			go = room_list->room;
+			set = 1;
 		}
 		room_list = room_list->next_room;
+	}
+	if (set == 0)
+	{
+		//ft_printf("Return -1\n");
+		return (NULL);
 	}
 	return (go);
 }
@@ -452,7 +460,7 @@ t_room *check_move(t_ant *ant, t_room_list *room_list)
 	t_room *go;
 
 	check_links = get_room_list_head(room_list, ant->current_room->name);
-	go = get_min_dist(check_links);
+	go = get_min_dist(check_links->next_room);
 	return (go);
 }
 
@@ -464,12 +472,13 @@ int next_move(t_ant *ant, t_room_list *room_list)
 	{
 		if (ant->has_moved == 0)
 		{
-			if ((go = check_move(ant, room_list)) == NULL)
-				return (0);	
-			move_ant_room(ant, go);
-			if (go->is_end)
-				return (-1);
-			return (0);
+			if ((go = check_move(ant, room_list)) != NULL)
+			{
+				move_ant_room(ant, go);
+				if (go->is_end)
+					return (-2);
+				return (1);
+			}
 		}
 		ant = ant->next_ant;
 	}
@@ -482,7 +491,7 @@ int reset_ants(t_ant *ant)
 	{
 		if (ant->at_end != 1)
 			ant->has_moved = 0;
-		ant = next_ant;
+		ant = ant->next_ant;
 	}
 	return (1);
 }
@@ -491,9 +500,10 @@ int move_ant_room(t_ant *ant, t_room *dest)
 {
 	if (dest->is_end == 1)
 		ant->at_end = 1;
+	dest->is_occupied = 1;
 	ant->current_room = dest;
 	ant->has_moved = 1;
-	ft_printf("L%i-%s", ant->number, dest->name);
+	ft_printf("L%i-%s ", ant->number, dest->name);
 	return (1);
 }
 
@@ -502,14 +512,14 @@ int move_ants(t_ant *ant, t_room_list *room_list)
 	int turns;
 	int move;
 
-	turns = get_size_ants(ant);
+	turns = get_size_ants(ant) * 2;
 	while (turns > 0)
 	{
 		move = turns;
 		reset_ants(ant);
 		while (move)
 			move += (next_move(ant, room_list));
-		turns = get_size_ants(ant);
+		turns = get_size_ants(ant) * 2;
 	}
 	return (1);
 }
@@ -528,7 +538,7 @@ int	lemin()
 	set_distance(room_list);
 	print_room_list(room_list);
 	set_ants(ants, room_list);
-	//move_ants(room_list);
+	move_ants(ants, room_list);
 	// NEED TO FREE ROOMS AND ROOM LIST BEFORE EXIT
 	return (1);
 }

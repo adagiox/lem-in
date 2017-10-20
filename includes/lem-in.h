@@ -7,7 +7,7 @@ typedef struct	s_ant
 	int				number;
 	unsigned int	has_moved:1;
 	unsigned int 	at_end:1;
-	t_room			*current_room;
+	struct s_room	*current_room;
 	struct s_ant	*next_ant;
 }				t_ant;
 
@@ -51,6 +51,7 @@ t_room_list *read_rooms();
 int set_distance(t_room_list *room_list);
 int read_links(char *line, t_room_list *room_list);
 int	lemin();
+int move_ant_room(t_ant *ant, t_room *dest);
 
 
 #endif

@@ -1,0 +1,1499 @@
+
+Room: 0
+------------------
+x:		1
+y:		0
+is_start:	1
+is_end:		0
+Distance:	3
+Links:		2
+
+Room: 1
+------------------
+x:		5
+y:		0
+is_start:	0
+is_end:		1
+Distance:	0
+Links:		3
+
+Room: 2
+------------------
+x:		9
+y:		0
+is_start:	0
+is_end:		0
+Distance:	2
+Links:		0, 3
+
+Room: 3
+------------------
+x:		13
+y:		0
+is_start:	0
+is_end:		0
+Distance:	1
+Links:		2, 1
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room: 0
+Turns: 6
+reset: 1
+at room: 0
+reset: 2
+at room: 0
+reset: 3
+at room:
