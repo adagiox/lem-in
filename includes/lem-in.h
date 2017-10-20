@@ -2,6 +2,9 @@
 # define LEM_IN_H
 # include "../libft/includes/libft.h"
 
+int g_start = 0;
+int g_end = 0;
+
 typedef struct	s_ant
 {
 	int				number;

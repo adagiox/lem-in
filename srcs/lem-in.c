@@ -84,7 +84,9 @@ t_ant *read_ants()
 		ft_printf("%s\n", line);
 		if (ret > 0)
 		{
-			if (line[0] == '#' && line[1] != '#')
+			if (ft_strstr(line, "##start") || ft_strstr(line, "##end"))
+				break ;
+			else if (line[0] == '#')
 				continue ;
 			else
 				break ;
@@ -134,9 +136,17 @@ t_room_list *command(char *line, t_room_list *room_list)
 	start = 0;
 	end = 0;
 	if (ft_strstr(line, "##start"))
+	{
+		g_start++;
 		start = 1;
+	}
 	else if (ft_strstr(line, "##end"))
+	{
+		g_end++;
 		end = 1;
+	}
+	if (g_end > 1 || g_start > 1)
+		return (NULL);
 	if ((room = next_room(start, end)) == NULL)
 		return (NULL);
 	room_list = add_room_list(room, room_list);
@@ -173,7 +183,7 @@ t_room *next_room(unsigned int start, unsigned int end)
 	if ((ret = get_next_line(0, &line)) <= 0)
 		return (NULL);
 	ft_printf("%s\n", line);
-	if (line[0] == '#') //|| (!ft_strstr(line, "-") && line[1] != '#')
+	if (line[0] == '#' || ft_strstr(line, "-") || line[1] == '#')
 		return (NULL);
 	split = ft_strsplit(line, ' ');
 	room = new_room(start, end, split);
@@ -220,8 +230,12 @@ t_room_list *read_rooms()
 		}
 		else if (line[0] == '#')
 			continue ;
-		else if (ft_strstr(line, "-"))
+		else if (!ft_strstr(line, "-"))
 		{
+			room_list = add_room_list(next_line_room(line), room_list);
+		}
+		else
+		{	
 			if ((read_links(line, room_list)) == -1)
 			{
 				free(line);
@@ -231,8 +245,6 @@ t_room_list *read_rooms()
 			free(line);
 			return (room_list);
 		}
-		else
-			room_list = add_room_list(next_line_room(line), room_list);
 		// free(line);
 	}
 	//ft_printf("Line: %s\n", line);
@@ -307,10 +319,16 @@ int read_links(char *line, t_room_list *room_list)
 	char *new_line;
 	int ret;
 
+	if (g_start == 0 || g_end == 0)
+		return (-1);
+	if (ft_strstr(line, " ") && line[0] != '#')
+		return (-1);
 	add_link_line(room_list, line);
 	while ((ret = get_next_line(0, &new_line)) > 0)
 	{
 		ft_printf("%s\n", new_line);
+		if (ft_strstr(new_line, " ") && new_line[0] != '#')
+			return (-1);
 		if (new_line[0] == '#' && ret > 0)
 		{
 			free(new_line);
@@ -319,7 +337,7 @@ int read_links(char *line, t_room_list *room_list)
 		else if (ft_strstr(new_line, "-") && ret > 0)
 			add_link_line(room_list, new_line);
 		else
-			break ;
+			return (-1);
 	}
 	return (1);
 }
