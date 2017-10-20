@@ -3,4 +3,4 @@ all:
 	gcc srcs/lem-in.c -L./libft -lft
 
 debug:
-	gcc srcs/lem-in.c -L./libft -lft -g -fsanitize=address
+	gcc srcs/lem-in.c -L./libft -lft -g

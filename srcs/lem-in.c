@@ -503,10 +503,6 @@ int move_ant_room(t_ant *ant, t_room *dest)
 	{
 		ant->at_end = 1;
 		ant->has_moved = 1;
-		p = dest->ant;
-		while (p->next_ant != NULL)
-			p = p->next_ant;
-		p->next_ant = ant;
 	}
 	else
 	{
@@ -529,9 +525,10 @@ int move_ants(t_ant *ant, t_room_list *room_list)
 	{
 		move = turns;
 		reset_ants(ant);
-		while (move)
+		while (move > 0)
 			move += (next_move(ant, room_list));
 		turns = get_size_ants(ant) * 2;
+		ft_printf("\n");
 	}
 	return (1);
 }
