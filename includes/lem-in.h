@@ -29,6 +29,12 @@ typedef struct	s_room_list
 	struct s_room_list	*next_room_list;
 }				t_room_list;
 
+typedef struct	s_queue
+{
+	t_room			*room;
+	struct s_queue	*next_room;
+}				t_queue;
+
 void print_ants(t_ant *ant);
 void print_room_list(t_room_list *room_list);
 void print_links(t_room_list *room_list);
@@ -40,7 +46,7 @@ t_room_list *command(char *line, t_room_list *room_list);
 t_room *new_room(unsigned int start, unsigned int end, char **room);
 t_room *next_room(unsigned int start, unsigned int end);
 t_room_list *read_rooms();
-int set_distance(t_room_list *room_list, int dist);
+int set_distance(t_room_list *room_list);
 int read_links(char *line, t_room_list *room_list);
 int	lemin();
 

@@ -142,7 +142,7 @@ t_room *new_room(unsigned int start, unsigned int end, char **room)
 
 	new = (t_room *)malloc(sizeof(t_room));
 	new->name = room[0];
-	new->dist = -1;
+	new->dist = 0;
 	new->is_set = 0;
 	new->x = ft_atoi(room[1]);
 	new->y = ft_atoi(room[2]);
@@ -214,6 +214,8 @@ t_room *get_link_room(t_room_list *room_list, char *name)
 
 t_room_list *get_room_list_head(t_room_list *room_list, char *name)
 {
+	if (room_list == NULL || name == NULL)
+		return (NULL);
 	while ((ft_strcmp(room_list->room->name, name)) != 0 && room_list != NULL)
 	{
 		room_list = room_list->next_room_list;
@@ -248,8 +250,9 @@ int add_link_line(t_room_list *room_list, char *line)
 	t_room_list *head;
 	t_room *room_add;
 
-	print_room_list(room_list);
+	//print_room_list(room_list);
 	split = ft_strsplit(line, '-');
+	free(line);
 	head = get_room_list_head(room_list, split[0]);
 	room_add = get_link_room(room_list, split[1]);
 	add_link_room(head, room_add);
@@ -281,21 +284,77 @@ t_room_list *get_end(t_room_list *room_list)
 {
 	while (room_list->room->is_end != 1 && room_list != NULL)
 		room_list = room_list->next_room_list;
+	room_list->room->is_set = 1;
 	return (room_list);
 }
 
-int set_distance(t_room_list *room_list, int dist)
+t_queue *new_queue(t_room *room, int dist)
 {
-	while (room_list != NULL)
+	t_queue *queue;
+
+	queue = (t_queue *)malloc(sizeof(t_queue));
+	queue->room = room;
+	queue->room->dist = dist + 1;
+	queue->room->is_set = 1;
+	ft_printf("Q Name: %s\tDist: %i\n", queue->room->name, queue->room->dist);
+	queue->next_room = NULL;
+	return (queue);
+}
+
+t_queue *enqueue(t_queue *queue, t_room *room, t_room_list *current)
+{
+	t_queue *head;
+	head = queue;
+
+	ft_printf("Enqueue\n");
+	if (queue == NULL)
 	{
-		if (room_list->room->is_set == 1)
+		ft_printf("Enqueue\n");
+		return (new_queue(room, current->room->dist));
+	}
+	ft_printf("Enqueue\n");
+	while (queue->next_room != NULL)
+		queue = queue->next_room;
+	queue->next_room = new_queue(room, current->room->dist);
+	return (head);
+}
+
+t_queue *dequeue(t_queue *queue)
+{
+	t_queue *current;
+
+	if (queue != NULL)
+	{
+		current = queue;
+		queue = queue->next_room;
+		free(current);
+	}
+	return (queue);
+}
+
+int set_distance(t_room_list *room_list)
+{
+	t_room_list *head;
+	t_room_list *current;
+	t_queue *queue;
+	// t_queue *tail;
+
+	queue = NULL;
+	head = room_list;
+	current = get_end(head);
+	while (current)
+	{
+		room_list = current->next_room;
+		while (room_list)
 		{
+			if (room_list->room->is_set == 0)
+				queue = enqueue(queue, room_list->room, current);
 			room_list = room_list->next_room;
-			continue ;
 		}
-		room_list->room->dist = dist;
-		room_list->room->is_set = 1;
-		set_distance(room_list->next_room, dist + 1);
+		if (queue == NULL)
+			return (1);
+		current = get_room_list_head(head, queue->room->name);
+		queue = dequeue(queue);
 	}
 	return (1);
 }
@@ -311,7 +370,7 @@ int	lemin()
 		return (-1);
 	if ((room_list = read_rooms()) == NULL)
 		return (-1);
-	set_distance(get_end(room_list), 0);
+	set_distance(room_list);
 	print_room_list(room_list);
 	return (1);
 }
