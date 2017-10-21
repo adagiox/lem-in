@@ -16,15 +16,16 @@ typedef struct	s_ant
 
 typedef struct	s_room
 {
-	char			*name;
-	int				dist;
-	unsigned int	is_set:1;
-	int				x;
-	int				y;
-	t_ant			*ant;
-	unsigned int	is_occupied:1;
-	unsigned int	is_start:1;
-	unsigned int	is_end:1;
+	char				*name;
+	int					dist;
+	unsigned int		is_set:1;
+	int					x;
+	int					y;
+	t_ant				*ant;
+	struct s_room_list	*head_room;
+	unsigned int		is_occupied:1;
+	unsigned int		is_start:1;
+	unsigned int		is_end:1;
 }				t_room;
 
 typedef struct	s_room_list

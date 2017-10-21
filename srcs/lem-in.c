@@ -88,8 +88,7 @@ t_ant *read_ants()
 				break ;
 			else if (line[0] == '#')
 				continue ;
-			else
-				break ;
+			break ;
 		}
 		else
 			return (NULL);
@@ -168,6 +167,7 @@ t_room *new_room(unsigned int start, unsigned int end, char **room)
 	new->x = ft_atoi(room[1]);
 	new->y = ft_atoi(room[2]);
 	new->ant = NULL;
+	new->head_room = NULL;
 	new->is_occupied = 0;
 	new->is_start = start;
 	new->is_end = end;
@@ -275,9 +275,7 @@ t_room_list *read_rooms()
 		if (ft_strstr(line, "##start") || ft_strstr(line, "##end"))
 		{
 			if ((room_list = command(line, room_list)) == NULL)
-			{
 				return (NULL);
-			}
 		}
 		else if (line[0] == '#')
 			continue ;
@@ -301,7 +299,6 @@ t_room_list *read_rooms()
 		}
 		// free(line);
 	}
-	//ft_printf("Line: %s\n", line);
 	ft_strdel(&line);
 	if (links == 0)
 		return (NULL);
@@ -314,6 +311,8 @@ t_room *get_link_room(t_room_list *room_list, char *name)
 		room_list = room_list->next_room_list;
 	if (room_list == NULL)
 		return (NULL);
+	if (room_list->room->head_room == NULL)
+		room_list->room->head_room = room_list;
 	return (room_list->room);
 }
 
@@ -326,6 +325,13 @@ t_room_list *get_room_list_head(t_room_list *room_list, char *name)
 	if (room_list == NULL)
 		return (NULL);
 	return (room_list);
+}
+
+t_room_list *get_room_list(t_room *room)
+{
+	if (room == NULL)
+		return (NULL);
+	return (room->head_room);
 }
 
 t_room_list *new_link_next_room(t_room *new_link_room)
@@ -469,7 +475,7 @@ int set_distance(t_room_list *room_list)
 		}
 		if (queue == NULL)
 			return (1);
-		current = get_room_list_head(head, queue->room->name);
+		current = get_room_list(queue->room);
 		queue = dequeue(queue);
 	}
 	current = get_start(head);
@@ -512,31 +518,6 @@ int get_size_ants(t_ant *ant)
 	return (size);
 }
 
-// t_room *get_min_dist(t_room_list *room_list)
-// {
-// 	int min;
-// 	t_room *go;
-
-// 	min = room_list->room->dist;
-// 	room_list = room_list->next_room;
-// 	if (room_list == NULL)
-// 		return (NULL);
-// 	go = room_list->room;
-// 	while (room_list)
-// 	{
-// 		//ft_printf("Room min: %s\n", room_list->room->name);
-// 		if (room_list->room->dist < min && room_list->room->is_occupied == 0)
-// 		{
-// 			min = room_list->room->dist;
-// 			go = room_list->room;
-// 		}
-// 		room_list = room_list->next_room;
-// 	}
-// 	if (go->is_occupied == 1)
-// 		return (NULL);
-// 	return (go);
-// }
-
 t_room *get_min_dist(t_room_list *room_list)
 {
 	t_room *go;
@@ -563,7 +544,7 @@ t_room *check_move(t_ant *ant, t_room_list *room_list)
 	t_room_list *check_links;
 	t_room *go;
 
-	check_links = get_room_list_head(room_list, ant->current_room->name);
+	check_links = get_room_list(ant->current_room);
 	go = get_min_dist(check_links);
 	return (go);
 }
@@ -586,7 +567,6 @@ int next_move(t_ant *ant, t_room_list *room_list)
 		}
 		ant = ant->next_ant;
 	}
-	//ft_printf("No ants can move\n");
 	return (-1);
 }
 
@@ -655,7 +635,6 @@ int	lemin()
 		return (-1);
 	if ((ret = set_distance(room_list)) == -1)
 		return (-1);
-	//print_room_list(room_list);
 	set_ants(ants, room_list);
 	ft_printf("\n");
 	move_ants(ants, room_list);
