@@ -199,7 +199,11 @@ int count_split(char **split)
 	i = 0;
 	while (split[i])
 	{
-		ft_printf("count split: %s\n", split[i]);
+		if (i == 1 || i == 2)
+		{
+			if (ft_isdigit(split[i][0]) == 0)
+				return (-1);
+		}
 		i++;
 		size++;
 	}
@@ -212,10 +216,7 @@ int	check_room_split(char **split)
 
 	size = count_split(split);
 	if (size != 3)
-	{
-		//ft_printf("split not 3\n");
 		return (-1);
-	}
 	return (1);
 }
 
@@ -309,7 +310,7 @@ t_room_list *read_rooms()
 
 t_room *get_link_room(t_room_list *room_list, char *name)
 {
-	while ((ft_strcmp(room_list->room->name, name)) != 0 && room_list != NULL)
+	while (room_list != NULL && (ft_strcmp(room_list->room->name, name)) != 0)
 		room_list = room_list->next_room_list;
 	if (room_list == NULL)
 		return (NULL);
@@ -320,10 +321,8 @@ t_room_list *get_room_list_head(t_room_list *room_list, char *name)
 {
 	if (room_list == NULL || name == NULL)
 		return (NULL);
-	while ((ft_strcmp(room_list->room->name, name)) != 0 && room_list != NULL)
-	{
+	while (room_list != NULL &&(ft_strcmp(room_list->room->name, name)) != 0)
 		room_list = room_list->next_room_list;
-	}
 	if (room_list == NULL)
 		return (NULL);
 	return (room_list);
@@ -355,10 +354,12 @@ int add_link_line(t_room_list *room_list, char *line)
 	t_room *room_add;
 
 	split = ft_strsplit(line, '-');
-	head = get_room_list_head(room_list, split[0]);
+	if ((head = get_room_list_head(room_list, split[0])) == NULL)
+		return (0);
 	room_add = get_link_room(room_list, split[1]);
 	add_link_room(head, room_add);
-	head = get_room_list_head(room_list, split[1]);
+	if ((head = get_room_list_head(room_list, split[1])) == NULL)
+		return (0);
 	room_add = get_link_room(room_list, split[0]);
 	add_link_room(head, room_add);
 	free(split[0]);
@@ -376,7 +377,8 @@ int read_links(char *line, t_room_list *room_list)
 		return (-1);
 	if (ft_strstr(line, " ") && line[0] != '#')
 		return (-1);
-	add_link_line(room_list, line);
+	if ((add_link_line(room_list, line)) == 0)
+		return (-1);
 	while ((ret = get_next_line(0, &new_line)) > 0)
 	{
 		ft_printf("%s\n", new_line);
@@ -388,7 +390,10 @@ int read_links(char *line, t_room_list *room_list)
 			continue ;
 		}
 		else if (ft_strstr(new_line, "-") && ret > 0)
-			add_link_line(room_list, new_line);
+		{
+			if ((add_link_line(room_list, new_line)) == 0)
+				return (-1);
+		}
 		else
 			return (-1);
 	}
@@ -454,7 +459,8 @@ int set_distance(t_room_list *room_list)
 	current = get_end(head);
 	while (current)
 	{
-		room_list = current->next_room;
+		if ((room_list = current->next_room) == NULL)
+			return (-1);
 		while (room_list)
 		{
 			if (room_list->room->is_set == 0)
@@ -574,7 +580,7 @@ int next_move(t_ant *ant, t_room_list *room_list)
 			{
 				move_ant_room(ant, go);
 				if (go->is_end)
-					return (-2);
+					return (-1);
 				return (1);
 			}
 		}
@@ -623,14 +629,14 @@ int move_ants(t_ant *ant, t_room_list *room_list)
 	int turns;
 	int move;
 
-	turns = get_size_ants(ant) * 2;
+	turns = get_size_ants(ant);
 	while (turns > 0)
 	{
 		move = turns;
 		reset_ants(ant);
 		while (move > 0)
 			move += (next_move(ant, room_list));
-		turns = get_size_ants(ant) * 2;
+		turns = get_size_ants(ant);
 		ft_printf("\n");
 	}
 	return (1);
