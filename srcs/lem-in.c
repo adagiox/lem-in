@@ -82,17 +82,15 @@ t_ant *read_ants()
 	while ((ret = get_next_line(0, &line)))
 	{
 		ft_printf("%s\n", line);
-		if (ret > 0)
-		{
-			if (ft_strstr(line, "##start") || ft_strstr(line, "##end"))
-				break ;
-			else if (line[0] == '#')
-				continue ;
+
+		if (ft_strstr(line, "##start") || ft_strstr(line, "##end"))
 			break ;
-		}
-		else
-			return (NULL);
+		else if (line[0] == '#')
+			continue ;
+		break ;
 	}
+	if (ret == 0 && line == NULL)
+		return (NULL);
 	size = ft_atoi(line);
 	if (size <= 0)
 		return (NULL);
@@ -562,7 +560,7 @@ int next_move(t_ant *ant, t_room_list *room_list)
 				move_ant_room(ant, go);
 				if (go->is_end)
 					return (-1);
-				return (1);
+				return (0);
 			}
 		}
 		ant = ant->next_ant;
@@ -587,8 +585,7 @@ int move_ant_room(t_ant *ant, t_room *dest)
 	t_room *src;
 
 	src = ant->current_room;
-	if (src->is_start == 0)
-		src->is_occupied = 0;
+	src->is_occupied = 0;
 	if (dest->is_end == 1)
 	{
 		ant->at_end = 1;
