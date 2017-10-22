@@ -41,9 +41,6 @@ typedef struct	s_queue
 	struct s_queue	*next_room;
 }				t_queue;
 
-void print_ants(t_ant *ant);
-void print_room_list(t_room_list *room_list);
-void print_links(t_room_list *room_list);
 t_ant *new_ants(int size);
 t_ant *read_ants();
 t_room_list *new_room_list(t_room *room);
@@ -55,6 +52,7 @@ t_room_list *read_rooms();
 int set_distance(t_room_list *room_list);
 int read_links(char *line, t_room_list *room_list);
 int	lemin();
+int check_hash(char *new_line);
 int move_ant_room(t_ant **ant, t_ant *current, t_room *dest);
 t_room_list *get_start(t_room_list *room_list);
 
