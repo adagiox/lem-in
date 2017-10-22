@@ -222,6 +222,20 @@ int	check_room_split(char **split)
 	return (1);
 }
 
+int free_split(char **split)
+{
+	char *temp;
+	int i;
+
+	i = 0;
+	while (split[i])
+	{
+		ft_strdel(&split[i]);
+		i++;
+	}
+	return (1);
+}
+
 t_room *next_room(unsigned int start, unsigned int end)
 {
 	char *line;
@@ -243,11 +257,12 @@ t_room *next_room(unsigned int start, unsigned int end)
 	split = ft_strsplit(line, ' ');
 	ft_strdel(&line);
 	if (check_room_split(split) == -1)
+	{
+		free_split(split);
 		return (NULL);
+	}
 	room = new_room(start, end, split);
-	free(split[0]);
-	free(split[1]);
-	free(split[2]);
+	free_split(split);
 	free(split);
 	return (room);
 }
@@ -259,11 +274,12 @@ t_room *next_line_room(char *line)
 
 	split = ft_strsplit(line, ' ');
 	if (check_room_split(split) == -1)
+	{
+		free_split(split);
 		return (NULL);
+	}
 	room = new_room(0, 0, split);
-	free(split[0]);
-	free(split[1]);
-	free(split[2]);
+	free_split(split);
 	free(split);
 	return (room);
 }
@@ -274,6 +290,7 @@ t_room_list *read_rooms()
 	int ret;
 	int links;
 	t_room_list *room_list;
+	t_room *room_add;
 
 	room_list = NULL;
 	links = 0;
@@ -290,9 +307,16 @@ t_room_list *read_rooms()
 		else if (!ft_strstr(line, "-"))
 		{
 			if (line[0] == 'L')
+			{
+				ft_strdel(&line);
 				return (NULL);
-			if ((room_list = add_room_list(next_line_room(line), room_list)) == NULL)
+			}
+			room_add = next_line_room(line);
+			if ((room_list = add_room_list(room_add, room_list)) == NULL)
+			{
+				ft_strdel(&line);
 				return (NULL);
+			}
 		}
 		else
 		{	
@@ -418,7 +442,6 @@ int read_links(char *line, t_room_list *room_list)
 		}
 		ft_strdel(&new_line);
 	}
-	ft_strdel(&new_line);
 	return (1);
 }
 
@@ -667,10 +690,23 @@ int free_room_list(t_room_list *room_list)
 		temp = head;
 		head = head->next_room;
 		if (temp->room != NULL)
+		{
+			free(temp->room->name);
 			free(temp->room);
-			//free(temp);
+		}
 	}
-	//free(head);
+	head = room_list;
+	while (head)
+	{
+		current = head;
+		head = head->next_room_list;
+		while (current)
+		{
+			temp = current;
+			current = current->next_room;
+			free(temp);
+		}
+	}
 	return (1);
 }
 
@@ -702,5 +738,7 @@ int main(void)
 		ft_printf("ERROR\n");
 		return (-1);
 	}
+	// while (1)
+	// 	usleep(1000);
 	return (0);
 }
