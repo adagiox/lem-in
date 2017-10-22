@@ -55,7 +55,7 @@ t_room_list *read_rooms();
 int set_distance(t_room_list *room_list);
 int read_links(char *line, t_room_list *room_list);
 int	lemin();
-int move_ant_room(t_ant *ant, t_room *dest);
+int move_ant_room(t_ant **ant, t_ant *current, t_room *dest);
 t_room_list *get_start(t_room_list *room_list);
 
 
