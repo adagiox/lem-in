@@ -1,4 +1,4 @@
-#include "../includes/lem-in.h"
+#include "../includes/lemin.h"
 
 t_ant *new_ant(t_ant *head, int number)
 {
