@@ -92,14 +92,11 @@ t_ant *read_ants()
 		break ;
 	}
 	if (ret == 0 && line == NULL)
-	{
-		ft_strdel(&line);
 		return (NULL);
-	}
 	size = ft_atoi(line);
-	ft_strdel(&line);
 	if (size <= 0)
 		return (NULL);
+	ft_strdel(&line);
 	ant = new_ants(size);
 	return (ant);
 }
@@ -300,10 +297,16 @@ t_room_list *read_rooms()
 		if (ft_strstr(line, "##start") || ft_strstr(line, "##end"))
 		{
 			if ((room_list = command(line, room_list)) == NULL)
+			{
+				ft_strdel(&line);
 				return (NULL);
+			}
 		}
 		else if (line[0] == '#')
+		{
+			ft_strdel(&line);
 			continue ;
+		}
 		else if (!ft_strstr(line, "-"))
 		{
 			if (line[0] == 'L')
@@ -321,16 +324,13 @@ t_room_list *read_rooms()
 		else
 		{	
 			if ((read_links(line, room_list)) == -1)
-			{
-				ft_strdel(&line);
 				return (NULL);
-			}
 			links = 1;
+			ft_strdel(&line);
 			return (room_list);
 		}
 		ft_strdel(&line);
 	}
-	ft_strdel(&line);
 	if (links == 0)
 		return (NULL);
 	return (room_list);
@@ -392,15 +392,20 @@ int add_link_line(t_room_list *room_list, char *line)
 
 	split = ft_strsplit(line, '-');
 	if ((head = get_room_list_head(room_list, split[0])) == NULL)
+	{
+		free_split(split);
 		return (0);
+	}
 	room_add = get_link_room(room_list, split[1]);
 	add_link_room(head, room_add);
 	if ((head = get_room_list_head(room_list, split[1])) == NULL)
+	{
+		free_split(split);
 		return (0);
+	}
 	room_add = get_link_room(room_list, split[0]);
 	add_link_room(head, room_add);
-	free(split[0]);
-	free(split[1]);
+	free_split(split);
 	free(split);
 	return (1);
 }
@@ -410,13 +415,23 @@ int read_links(char *line, t_room_list *room_list)
 	char *new_line;
 	int ret;
 
+	new_line = NULL;
 	if (g_start == 0 || g_end == 0)
+	{
+		ft_strdel(&line);
 		return (-1);
+	}
 	if (ft_strstr(line, " ") && line[0] != '#')
+	{
+		ft_strdel(&line);	
 		return (-1);
+	}
 	if ((add_link_line(room_list, line)) == 0)
+	{
+		ft_strdel(&line);
 		return (-1);
-	ft_strdel(&line);
+	}
+
 	while ((ret = get_next_line(0, &new_line)) > 0)
 	{
 		ft_printf("%s\n", new_line);
@@ -425,22 +440,25 @@ int read_links(char *line, t_room_list *room_list)
 			ft_strdel(&new_line);
 			return (-1);
 		}
-		if (new_line[0] == '#' && ret > 0)
+		if (new_line[0] == '#')
+		{
+			ft_strdel(&new_line);
 			continue ;
-		else if (ft_strstr(new_line, "-") && ret > 0)
+		}
+		else if (ft_strstr(new_line, "-"))
 		{
 			if ((add_link_line(room_list, new_line)) == 0)
 			{
 				ft_strdel(&new_line);
 				return (-1);
 			}
+			ft_strdel(&new_line);
 		}
 		else
 		{
 			ft_strdel(&new_line);
 			return (-1);
 		}
-		ft_strdel(&new_line);
 	}
 	return (1);
 }
@@ -688,10 +706,10 @@ int free_room_list(t_room_list *room_list)
 	while (head)
 	{
 		temp = head;
-		head = head->next_room;
+		head = head->next_room_list;
 		if (temp->room != NULL)
 		{
-			free(temp->room->name);
+			ft_strdel(&temp->room->name);
 			free(temp->room);
 		}
 	}
