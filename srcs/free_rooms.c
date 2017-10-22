@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_rooms.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erintala <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 16:06:41 by erintala          #+#    #+#             */
+/*   Updated: 2017/10/22 16:06:44 by erintala         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lemin.h"
 
-void free_rooms(t_room_list *temp)
+void	free_rooms(t_room_list *temp)
 {
 	if (temp->room != NULL)
 	{
@@ -9,7 +21,7 @@ void free_rooms(t_room_list *temp)
 	}
 }
 
-int free_room_list(t_room_list *room_list)
+int		free_room_list(t_room_list *room_list)
 {
 	t_room_list *head;
 	t_room_list *current;

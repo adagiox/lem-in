@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_ants.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erintala <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 16:06:56 by erintala          #+#    #+#             */
+/*   Updated: 2017/10/22 16:06:59 by erintala         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lemin.h"
 
-t_room *check_move(t_ant *ant)
+t_room	*check_move(t_ant *ant)
 {
-	t_room_list *check_links;
-	t_room *go;
+	t_room_list	*check_links;
+	t_room		*go;
 
 	check_links = get_room_list(ant->current_room);
 	go = get_min_dist(check_links);
 	return (go);
 }
 
-int next_move(t_ant **ant)
+int		next_move(t_ant **ant)
 {
-	t_room *go;
-	t_ant *current;
+	t_room	*go;
+	t_ant	*current;
 
 	current = *ant;
 	while (current)
@@ -31,7 +43,7 @@ int next_move(t_ant **ant)
 	return (1);
 }
 
-int move_ant_room(t_ant **ant, t_ant *current, t_room *dest)
+int		move_ant_room(t_ant **ant, t_ant *current, t_room *dest)
 {
 	t_room *src;
 
@@ -55,7 +67,7 @@ int move_ant_room(t_ant **ant, t_ant *current, t_room *dest)
 	return (1);
 }
 
-int get_moves(int n, t_room_list *room_list)
+int		get_moves(int n, t_room_list *room_list)
 {
 	int moves;
 
@@ -66,7 +78,7 @@ int get_moves(int n, t_room_list *room_list)
 	return (moves);
 }
 
-int move_ants(t_ant **ant, t_room_list *room_list)
+int		move_ants(t_ant **ant, t_room_list *room_list)
 {
 	int turns;
 	int move;

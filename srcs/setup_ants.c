@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setup_ants.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erintala <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 16:07:14 by erintala          #+#    #+#             */
+/*   Updated: 2017/10/22 16:07:16 by erintala         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lemin.h"
 
-int set_ants(t_ant *ant, t_room_list *room_list)
+int	set_ants(t_ant *ant, t_room_list *room_list)
 {
 	room_list = get_start(room_list);
 	while (ant)
@@ -11,7 +23,7 @@ int set_ants(t_ant *ant, t_room_list *room_list)
 	return (1);
 }
 
-int get_size_ants(t_ant *ant)
+int	get_size_ants(t_ant *ant)
 {
 	int size;
 
@@ -25,7 +37,7 @@ int get_size_ants(t_ant *ant)
 	return (size);
 }
 
-int reset_ants(t_ant *ant)
+int	reset_ants(t_ant *ant)
 {
 	while (ant)
 	{

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_links.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erintala <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 16:07:43 by erintala          #+#    #+#             */
+/*   Updated: 2017/10/22 16:07:44 by erintala         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lemin.h"
 
-t_room_list *new_link_next_room(t_room *new_link_room)
+t_room_list	*new_link_next_room(t_room *new_link_room)
 {
 	t_room_list *new_next_room;
 
@@ -11,7 +23,7 @@ t_room_list *new_link_next_room(t_room *new_link_room)
 	return (new_next_room);
 }
 
-int add_link_room(t_room_list *room_list_head, t_room *new_link_room)
+int			add_link_room(t_room_list *room_list_head, t_room *new_link_room)
 {
 	while (room_list_head->next_room != NULL)
 		room_list_head = room_list_head->next_room;
@@ -19,11 +31,11 @@ int add_link_room(t_room_list *room_list_head, t_room *new_link_room)
 	return (1);
 }
 
-int add_link_line(t_room_list *room_list, char *line)
+int			add_link_line(t_room_list *room_list, char *line)
 {
-	char **split;
-	t_room_list *head;
-	t_room *room_add;
+	char		**split;
+	t_room_list	*head;
+	t_room		*room_add;
 
 	split = ft_strsplit(line, '-');
 	if ((head = get_room_list_head(room_list, split[0])) == NULL)
@@ -45,7 +57,7 @@ int add_link_line(t_room_list *room_list, char *line)
 	return (1);
 }
 
-int read_links_add_link_line(t_room_list *room_list, char *new_line)
+int			read_links_add_link_line(t_room_list *room_list, char *new_line)
 {
 	if ((add_link_line(room_list, new_line)) == 0)
 	{
@@ -55,10 +67,10 @@ int read_links_add_link_line(t_room_list *room_list, char *new_line)
 	return (1);
 }
 
-int read_links(char *line, t_room_list *room_list)
+int			read_links(char *line, t_room_list *room_list)
 {
-	char *new_line;
-	int ret;
+	char	*new_line;
+	int		ret;
 
 	if (check_link_error(room_list, line) == -1)
 		return (-1);

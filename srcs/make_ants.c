@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   make_ants.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erintala <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 16:07:37 by erintala          #+#    #+#             */
+/*   Updated: 2017/10/22 16:07:38 by erintala         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lemin.h"
 
-t_ant *new_ant(t_ant *head, int number)
+t_ant	*new_ant(t_ant *head, int number)
 {
 	head = (t_ant *)malloc(sizeof(t_ant));
 	head->number = number;
@@ -11,12 +23,12 @@ t_ant *new_ant(t_ant *head, int number)
 	return (head);
 }
 
-t_ant *new_ants(int size)
+t_ant	*new_ants(int size)
 {
-	t_ant *ant;
-	t_ant *new;
-	t_ant *head;
-	int number;
+	t_ant	*ant;
+	t_ant	*new;
+	t_ant	*head;
+	int		number;
 
 	head = NULL;
 	number = 1;
@@ -34,12 +46,12 @@ t_ant *new_ants(int size)
 	return (head);
 }
 
-t_ant *read_ants()
+t_ant	*read_ants(void)
 {
-	char *line;
-	t_ant *ant;
-	int size;
-	int ret;
+	char	*line;
+	t_ant	*ant;
+	int		size;
+	int		ret;
 
 	while ((ret = get_next_line(0, &line)))
 	{

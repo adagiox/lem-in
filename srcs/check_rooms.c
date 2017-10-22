@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_rooms.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erintala <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 16:07:22 by erintala          #+#    #+#             */
+/*   Updated: 2017/10/22 16:07:23 by erintala         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lemin.h"
 
 int	check_line_split(char **split)
@@ -15,7 +27,7 @@ int	check_line_split(char **split)
 	return (1);
 }
 
-int count_split(char **split)
+int	count_split(char **split)
 {
 	int i;
 	int size;
@@ -35,7 +47,7 @@ int count_split(char **split)
 	return (size);
 }
 
-int free_split(char **split)
+int	free_split(char **split)
 {
 	int i;
 
@@ -62,7 +74,7 @@ int	check_room_split(char **split)
 	return (1);
 }
 
-int check_l(char *line)
+int	check_l(char *line)
 {
 	if (line[0] == 'L')
 	{

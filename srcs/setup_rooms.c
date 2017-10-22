@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setup_rooms.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erintala <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 16:08:03 by erintala          #+#    #+#             */
+/*   Updated: 2017/10/22 16:08:04 by erintala         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lemin.h"
 
-t_room_list *new_room_list(t_room *room)
+t_room_list	*new_room_list(t_room *room)
 {
 	t_room_list *new;
 
@@ -11,7 +23,7 @@ t_room_list *new_room_list(t_room *room)
 	return (new);
 }
 
-t_room_list *add_room_list(t_room *room, t_room_list *room_list)
+t_room_list	*add_room_list(t_room *room, t_room_list *room_list)
 {
 	t_room_list *head;
 
@@ -26,11 +38,11 @@ t_room_list *add_room_list(t_room *room, t_room_list *room_list)
 	return (head);
 }
 
-t_room_list *command(char *line, t_room_list *room_list)
+t_room_list	*command(char *line, t_room_list *room_list)
 {
-	unsigned int start;
-	unsigned int end;
-	t_room *room;
+	unsigned int	start;
+	unsigned int	end;
+	t_room			*room;
 
 	start = 0;
 	end = 0;
@@ -52,10 +64,10 @@ t_room_list *command(char *line, t_room_list *room_list)
 	return (room_list);
 }
 
-t_room *new_room(unsigned int start, unsigned int end, char **room)
+t_room		*new_room(unsigned int start, unsigned int end, char **room)
 {
-	t_room *new;
-	char *name;
+	t_room	*new;
+	char	*name;
 
 	name = ft_strdup(room[0]);
 	new = (t_room *)malloc(sizeof(t_room));
@@ -72,12 +84,12 @@ t_room *new_room(unsigned int start, unsigned int end, char **room)
 	return (new);
 }
 
-t_room *next_room(unsigned int start, unsigned int end)
+t_room		*next_room(unsigned int start, unsigned int end)
 {
-	char *line;
-	char **split;
-	t_room *room;
-	int ret;
+	char	*line;
+	char	**split;
+	t_room	*room;
+	int		ret;
 
 	if ((ret = get_next_line(0, &line)) <= 0)
 	{

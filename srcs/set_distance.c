@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_distance.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erintala <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 16:07:51 by erintala          #+#    #+#             */
+/*   Updated: 2017/10/22 16:07:52 by erintala         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lemin.h"
 
-t_queue *new_queue(t_room *room, int dist)
+t_queue	*new_queue(t_room *room, int dist)
 {
 	t_queue *queue;
 
@@ -12,11 +24,11 @@ t_queue *new_queue(t_room *room, int dist)
 	return (queue);
 }
 
-t_queue *enqueue(t_queue *queue, t_room *room, t_room_list *current)
+t_queue	*enqueue(t_queue *queue, t_room *room, t_room_list *current)
 {
-	t_queue *head;
-	head = queue;
+	t_queue	*head;
 
+	head = queue;
 	if (queue == NULL)
 		return (new_queue(room, current->room->dist));
 	while (queue->next_room != NULL)
@@ -25,7 +37,7 @@ t_queue *enqueue(t_queue *queue, t_room *room, t_room_list *current)
 	return (head);
 }
 
-t_queue *dequeue(t_queue *queue)
+t_queue	*dequeue(t_queue *queue)
 {
 	t_queue *current;
 
@@ -38,10 +50,10 @@ t_queue *dequeue(t_queue *queue)
 	return (queue);
 }
 
-t_room *get_min_dist(t_room_list *room_list)
+t_room	*get_min_dist(t_room_list *room_list)
 {
-	t_room *go;
-	t_room_list *src;
+	t_room		*go;
+	t_room_list	*src;
 
 	src = room_list;
 	room_list = room_list->next_room;
@@ -50,7 +62,8 @@ t_room *get_min_dist(t_room_list *room_list)
 	go = room_list->room;
 	while (room_list)
 	{
-		if (room_list->room->dist < src->room->dist && room_list->room->is_occupied == 0)
+		if (room_list->room->dist < src->room->dist &&
+			room_list->room->is_occupied == 0)
 			go = room_list->room;
 		room_list = room_list->next_room;
 	}
@@ -59,11 +72,11 @@ t_room *get_min_dist(t_room_list *room_list)
 	return (NULL);
 }
 
-int set_distance(t_room_list *room_list)
+int		set_distance(t_room_list *room_list)
 {
-	t_room_list *head;
-	t_room_list *current;
-	t_queue *queue;
+	t_room_list	*head;
+	t_room_list	*current;
+	t_queue		*queue;
 
 	queue = NULL;
 	head = room_list;

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_rooms.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erintala <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 16:07:05 by erintala          #+#    #+#             */
+/*   Updated: 2017/10/22 16:07:07 by erintala         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/lemin.h"
 
-t_room *next_line_room(char *line)
+t_room		*next_line_room(char *line)
 {
-	t_room *room;
-	char **split;
+	t_room	*room;
+	char	**split;
 
 	split = ft_strsplit(line, ' ');
 	if (check_room_split(split) == -1)
@@ -14,7 +26,7 @@ t_room *next_line_room(char *line)
 	return (room);
 }
 
-t_room_list *read_rooms_read_links(t_room_list *room_list, char *line)
+t_room_list	*read_rooms_read_links(t_room_list *room_list, char *line)
 {
 	if ((read_links(line, room_list)) == -1)
 		return (NULL);
@@ -22,7 +34,7 @@ t_room_list *read_rooms_read_links(t_room_list *room_list, char *line)
 	return (room_list);
 }
 
-t_room_list *read_rooms_command(t_room_list *room_list, char *line)
+t_room_list	*read_rooms_command(t_room_list *room_list, char *line)
 {
 	if ((room_list = command(line, room_list)) == NULL)
 	{
@@ -32,7 +44,7 @@ t_room_list *read_rooms_command(t_room_list *room_list, char *line)
 	return (room_list);
 }
 
-t_room_list *read_rooms_room_list(t_room_list *room_list, char *line)
+t_room_list	*read_rooms_room_list(t_room_list *room_list, char *line)
 {
 	t_room *room_add;
 
@@ -50,11 +62,11 @@ t_room_list *read_rooms_room_list(t_room_list *room_list, char *line)
 	return (room_list);
 }
 
-t_room_list *read_rooms()
+t_room_list	*read_rooms(void)
 {
-	char *line;
-	int ret;
-	t_room_list *room_list;
+	char		*line;
+	int			ret;
+	t_room_list	*room_list;
 
 	room_list = NULL;
 	while ((ret = get_next_line(0, &line)) > 0)
