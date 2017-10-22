@@ -51,6 +51,8 @@ int		read_line(t_gnl *node, char **line)
 		*line = temp;
 		return (1);
 	}
+	if (ret == 0 && ft_strlen(temp) == 0)
+		free(temp);
 	return (ret);
 }
 

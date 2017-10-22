@@ -39,6 +39,17 @@ void print_links(t_room_list *room_list)
 	ft_printf("\n");
 }
 
+t_ant *new_ant(t_ant *head, int number)
+{
+	head = (t_ant *)malloc(sizeof(t_ant));
+	head->number = number;
+	head->has_moved = 0;
+	head->at_end = 0;
+	head->current_room = NULL;
+	head->next_ant = NULL;
+	return (head);
+}
+
 t_ant *new_ants(int size)
 {
 	t_ant *ant;
@@ -46,29 +57,19 @@ t_ant *new_ants(int size)
 	t_ant *head;
 	int number;
 
+	head = NULL;
 	number = 1;
-	head = (t_ant *)malloc(sizeof(t_ant));
-	head->number = number;
-	head->has_moved = 0;
-	head->at_end = 0;
-	head->current_room = NULL;
-	head->next_ant = NULL;
+	head = new_ant(head, number);
 	number++;
 	ant = head;
 	while (number < size + 1)
 	{
 		while (ant->next_ant != NULL)
 			ant = ant->next_ant;
-		new = (t_ant *)malloc(sizeof(t_ant));
-		new->number = number;
-		new->has_moved = 0;
-		new->at_end = 0;
-		new->current_room = NULL;
-		new->next_ant = NULL;
+		new = new_ant(new, number);
 		ant->next_ant = new;
 		number++;
 	}
-	// MEMORY LEAK HERE
 	return (head);
 }
 
@@ -129,7 +130,6 @@ t_room_list *add_room_list(t_room *room, t_room_list *room_list)
 
 t_room_list *command(char *line, t_room_list *room_list)
 {
-	char *new_line;
 	unsigned int start;
 	unsigned int end;
 	t_room *room;
@@ -209,19 +209,8 @@ int count_split(char **split)
 	return (size);
 }
 
-int	check_room_split(char **split)
-{
-	int size;
-
-	size = count_split(split);
-	if (size != 3)
-		return (-1);
-	return (1);
-}
-
 int free_split(char **split)
 {
-	char *temp;
 	int i;
 
 	i = 0;
@@ -229,6 +218,20 @@ int free_split(char **split)
 	{
 		ft_strdel(&split[i]);
 		i++;
+	}
+	return (1);
+}
+
+int	check_room_split(char **split)
+{
+	int size;
+
+	size = count_split(split);
+	if (size != 3)
+	{
+		free_split(split);
+		free(split);
+		return (-1);
 	}
 	return (1);
 }
@@ -246,7 +249,8 @@ t_room *next_room(unsigned int start, unsigned int end)
 		return (NULL);
 	}
 	ft_printf("%s\n", line);
-	if (line[0] == '#' || ft_strstr(line, "-") || line[1] == '#' || line[0] == 'L')
+	if (line[0] == '#' || ft_strstr(line, "-") || line[1] == '#' ||
+		line[0] == 'L')
 	{
 		ft_strdel(&line);
 		return (NULL);
@@ -254,10 +258,7 @@ t_room *next_room(unsigned int start, unsigned int end)
 	split = ft_strsplit(line, ' ');
 	ft_strdel(&line);
 	if (check_room_split(split) == -1)
-	{
-		free_split(split);
 		return (NULL);
-	}
 	room = new_room(start, end, split);
 	free_split(split);
 	free(split);
@@ -271,10 +272,7 @@ t_room *next_line_room(char *line)
 
 	split = ft_strsplit(line, ' ');
 	if (check_room_split(split) == -1)
-	{
-		free_split(split);
 		return (NULL);
-	}
 	room = new_room(0, 0, split);
 	free_split(split);
 	free(split);
@@ -415,23 +413,12 @@ int read_links(char *line, t_room_list *room_list)
 	char *new_line;
 	int ret;
 
-	new_line = NULL;
-	if (g_start == 0 || g_end == 0)
+	if (g_start == 0 || g_end == 0 || (ft_strstr(line, " ") && line[0] != '#')
+		|| (add_link_line(room_list, line)) == 0)
 	{
 		ft_strdel(&line);
 		return (-1);
 	}
-	if (ft_strstr(line, " ") && line[0] != '#')
-	{
-		ft_strdel(&line);	
-		return (-1);
-	}
-	if ((add_link_line(room_list, line)) == 0)
-	{
-		ft_strdel(&line);
-		return (-1);
-	}
-
 	while ((ret = get_next_line(0, &new_line)) > 0)
 	{
 		ft_printf("%s\n", new_line);
@@ -536,9 +523,7 @@ int set_distance(t_room_list *room_list)
 		queue = dequeue(queue);
 	}
 	current = get_start(head);
-	if (current->room->is_set == 0)
-		return (-1);
-	return (1);
+	return (current->room->is_set == 0 ? -1 : 1);
 }
 
 t_room_list *get_start(t_room_list *room_list)
@@ -596,7 +581,7 @@ t_room *get_min_dist(t_room_list *room_list)
 	return (NULL);
 }
 
-t_room *check_move(t_ant *ant, t_room_list *room_list)
+t_room *check_move(t_ant *ant)
 {
 	t_room_list *check_links;
 	t_room *go;
@@ -606,7 +591,7 @@ t_room *check_move(t_ant *ant, t_room_list *room_list)
 	return (go);
 }
 
-int next_move(t_ant **ant, t_room_list *room_list)
+int next_move(t_ant **ant)
 {
 	t_room *go;
 	t_ant *current;
@@ -616,7 +601,7 @@ int next_move(t_ant **ant, t_room_list *room_list)
 	{
 		if (current->has_moved == 0)
 		{
-			if ((go = check_move(current, room_list)) != NULL)
+			if ((go = check_move(current)) != NULL)
 			{
 				move_ant_room(ant, current, go);
 				return (1);
@@ -639,7 +624,6 @@ int reset_ants(t_ant *ant)
 
 int move_ant_room(t_ant **ant, t_ant *current, t_room *dest)
 {
-	t_ant *p;
 	t_room *src;
 
 	src = current->current_room;
@@ -687,13 +671,22 @@ int move_ants(t_ant **ant, t_room_list *room_list)
 		reset_ants(*ant);
 		while (move > 0)
 		{
-			next_move(ant, room_list);
+			next_move(ant);
 			move--;
 		}
 		turns = get_size_ants(*ant);
 		ft_printf("\n");
 	}
 	return (1);
+}
+
+void free_rooms(t_room_list *temp)
+{
+	if (temp->room != NULL)
+	{
+		ft_strdel(&temp->room->name);
+		free(temp->room);
+	}
 }
 
 int free_room_list(t_room_list *room_list)
@@ -707,11 +700,7 @@ int free_room_list(t_room_list *room_list)
 	{
 		temp = head;
 		head = head->next_room_list;
-		if (temp->room != NULL)
-		{
-			ft_strdel(&temp->room->name);
-			free(temp->room);
-		}
+		free_rooms(temp);
 	}
 	head = room_list;
 	while (head)
@@ -730,7 +719,6 @@ int free_room_list(t_room_list *room_list)
 
 int	lemin()
 {
-	char *line;
 	t_ant *ants;
 	t_room_list *room_list;
 
@@ -756,7 +744,5 @@ int main(void)
 		ft_printf("ERROR\n");
 		return (-1);
 	}
-	// while (1)
-	// 	usleep(1000);
 	return (0);
 }
