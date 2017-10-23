@@ -1,4 +1,0 @@
-LINE: 1 1 1
-LINE: 3 3 3
-Line: ##end
-ERROR
